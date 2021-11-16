@@ -1,6 +1,6 @@
 # "to read aloud" - a book list desktop application
 
-## This is an book list application built with [Electron](https://www.electronjs.org/).
+## This is a book list application built with [Electron](https://www.electronjs.org/).
 
 ## To Run Locally:
 
