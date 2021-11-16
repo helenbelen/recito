@@ -1,1 +1,5 @@
 node_modules
+
+out/
+nohup.out
+.idea/runConfigurations.xml

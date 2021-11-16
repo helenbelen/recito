@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <title>Book List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<h1>Hello World!</h1>
-We are using Node.js <span id="node-version"></span>,
-Chromium <span id="chrome-version"></span>,
-and Electron <span id="electron-version"></span>.
+<header>
+    <h2>Book List</h2>
+</header>
+
+<section>
+    <nav>
+        <ul>
+            <li><a href="#">Search For Books</a></li>
+            <li><a href="#">Book List</a></li>
+        </ul>
+    </nav>
+    <article>
+        <label for="searchBox">Search Book Title:</label><br>
+        <input type="text" id="searchBox"><br><br>
+        <input type="submit" id="searchButton" value="Search">
+        <p id="results"></p>
+    </article>
+</section>
+<script src="./renderer.js"></script>
 </body>
 </html>
+
