@@ -18,8 +18,12 @@ function createWindow () {
 
 async function queryBooks (event, term) {
     await https.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${term}&key=${process.env.API_KEY}`, (response) => {
+        let message = ""
         response.on('data', chunk => {
-            event.reply('sendBooksApiResponse', chunk.toString())
+            message  = message + chunk.toString()
+        })
+        response.on('end', () => {
+            event.reply('sendBooksApiResponse', message)
         })
     })
 }

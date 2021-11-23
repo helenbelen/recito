@@ -1,30 +1,23 @@
 const {contextBridge, ipcRenderer} = require('electron')
-const Buffer = require("buffer");
 
 contextBridge.exposeInMainWorld(
     'electron',
     {
-        runBooks: (searchTerm) => ipcRenderer.send('runBooksApi', searchTerm),
-        myPromises: [Promise.resolve(), Promise.reject(new Error('whoops'))],
-        anAsyncFunction: async () => alert(123),
-        data: {
-            myFlags: ['a', 'b', 'c'],
-            bootTime: 1234
-        },
-        nestedAPI: {
-            evenDeeper: {
-                youCanDoThisAsMuchAsYouWant: {
-                    fn: () => ({
-                        returnData: 123
-                    })
-                }
-            }
-        }
+        runBooks: (searchTerm) => ipcRenderer.send('runBooksApi', searchTerm)
     }
 )
 
 ipcRenderer.on('sendBooksApiResponse', (event, arg) => {
-    document.getElementById('results').innerText = arg
+    let json = JSON.parse(arg.toString())
+    let results = json.items
+    let list = document.getElementById("resultList");
+    list.innerHTML = ''
+    results.forEach((result)=>{
+        let li = document.createElement("li");
+        li.innerText = result["volumeInfo"]["title"] + " by " + result["volumeInfo"]["authors"];
+        list.appendChild(li);
+    })
+    document.getElementById('results').innerText = json.totalItems + " Results Found."
 })
 
 window.addEventListener('DOMContentLoaded', () => {

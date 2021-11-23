@@ -22,7 +22,10 @@
         <label for="searchBox">Search Book Title:</label><br>
         <input type="text" id="searchBox"><br><br>
         <input type="submit" id="searchButton" value="Search">
-        <p id="results"></p>
+        <div style="width:100%;overflow:scroll">
+            <pre id="results"></pre>
+        </div>
+        <ul id="resultList"></ul>
     </article>
 </section>
 <script src="./renderer.js"></script>
