@@ -1,9 +1,7 @@
-const {webdriver} = require('selenium-webdriver')
 const {until} = require('selenium-webdriver')
-const {eyes} = require('selenium-webdriver')
 const {Builder, By} = require('selenium-webdriver')
-let assert = require('assert');
-
+const chai = require('chai')
+let should = chai.should();
 
 describe('Search', function () {
     let driver = null;
@@ -28,8 +26,11 @@ describe('Search', function () {
         driver.wait(until.elementTextContains(By.id('results'), "Orwell"), 4000);
         driver.wait(() => {
             driver.findElement(By.id('results')).getText().then((resultsText) => {
-                assert(resultsText.length > 0, "Expected results to be populated")
+                chai.assert.equal(resultsText.split(' ').length, 3, "Expected results to be populated")
                 driver.quit()
+            })
+            driver.findElements(By.tagName('li')).then((listElements) => {
+                listElements.length.should.not.equal(0)
             })
         }, 2000)
 
