@@ -1,9 +1,22 @@
 const {contextBridge, ipcRenderer} = require('electron')
-
+const { Pool } = require('pg');
+let pool = null
 contextBridge.exposeInMainWorld(
     'electron',
     {
-        runBooks: (searchTerm) => ipcRenderer.send('runBooksApi', searchTerm)
+        runBooks: (searchTerm) => ipcRenderer.send('runBooksApi', searchTerm),
+        dbPool: () => {
+            if (!pool) {
+                pool = new Pool({
+                    user: 'postgres',
+                    host: '127.0.0.1',
+                    database: 'postgres',
+                    password: 'postgres',
+                    port: 5432,
+                })
+            }
+            return pool;
+        }
     }
 )
 
@@ -18,15 +31,4 @@ ipcRenderer.on('sendBooksApiResponse', (event, arg) => {
         list.appendChild(li);
     })
     document.getElementById('results').innerText = json.totalItems + " Results Found."
-})
-
-window.addEventListener('DOMContentLoaded', () => {
-    const replaceText = (selector, text) => {
-        const element = document.getElementById(selector)
-        if (element) element.innerText = text
-    }
-
-    for (const dependency of ['chrome', 'node', 'electron']) {
-        replaceText(`${dependency}-version`, process.versions[dependency])
-    }
 })

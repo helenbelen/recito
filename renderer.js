@@ -4,4 +4,8 @@ document.getElementById('searchButton').onclick = (event) => {
     window.electron.runBooks(search)
 }
 
+window.addEventListener('DOMContentLoaded', () => {
+    window.electron.dbPool()
+})
+
 
