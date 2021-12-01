@@ -6,6 +6,7 @@ document.getElementById('searchButton').onclick = (event) => {
 
 window.addEventListener('DOMContentLoaded', () => {
     window.electron.dbPool()
+    window.electron.refreshList()
 })
 
 

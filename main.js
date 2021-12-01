@@ -28,8 +28,12 @@ async function queryBooks (event, term) {
     })
 }
 
+ipcMain.on('addBooksToList', (event, arg) => {
+    event.reply('updateUserBookList', message).then(_ => console.log(`Added Books: ${arg}`))
+})
+
 ipcMain.on('runBooksApi', (event, arg) => {
-    queryBooks(event, arg).then(r => console.log(`search for '${arg}' complete`))
+    queryBooks(event, arg).then(_ => console.log(`search for '${arg}' complete`))
 })
 
 app.whenReady().then(() => {

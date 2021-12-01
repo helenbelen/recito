@@ -7,18 +7,9 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<header>
-    <h2>Book List</h2>
-</header>
-
-<section>
-    <nav>
-        <ul>
-            <li><a href="#">Search For Books</a></li>
-            <li><a href="#">Book List</a></li>
-        </ul>
-    </nav>
-    <article>
+<div class="grid-container">
+    <div class="header">RECITO</div>
+    <div class="left">
         <label for="searchBox">Search Book Title:</label><br>
         <input type="text" id="searchBox"><br><br>
         <input type="submit" id="searchButton" value="Search">
@@ -26,8 +17,10 @@
             <pre id="results"></pre>
         </div>
         <ul id="resultList"></ul>
-    </article>
-</section>
+    </div>
+    <div class="right">Book List</div>
+    <div class="footer">https://github.com/helenbelen/recito</div>
+</div>
 <script src="./renderer.js"></script>
 </body>
 </html>
