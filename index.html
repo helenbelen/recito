@@ -9,16 +9,17 @@
 <body>
 <div class="grid-container">
     <div class="header">RECITO</div>
-    <div class="left">
+    <div class="left" style="width:100%;overflow:scroll">
         <label for="searchBox">Search Book Title:</label><br>
         <input type="text" id="searchBox"><br><br>
         <input type="submit" id="searchButton" value="Search">
-        <div style="width:100%;overflow:scroll">
-            <pre id="results"></pre>
-        </div>
+        <pre id="results"></pre>
         <ul id="resultList"></ul>
     </div>
-    <div class="right">Book List</div>
+    <div class="right" style="width:100%;overflow:scroll">
+        <h1>Book List</h1>
+        <ul id="bookList"></ul>
+    </div>
     <div class="footer">https://github.com/helenbelen/recito</div>
 </div>
 <script src="./renderer.js"></script>

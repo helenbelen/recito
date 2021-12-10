@@ -17,20 +17,23 @@ function createWindow () {
 }
 
 async function queryBooks (event, term) {
-    await https.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${term}&key=${process.env.API_KEY}`, (response) => {
-        let message = ""
-        response.on('data', chunk => {
-            message  = message + chunk.toString()
+    if (!process.env.API_KEY) {
+        event.reply('sendBooksApiResponse', { "error": "API KEY IS NOT SET." })
+    } else {
+        await https.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${term}&key=${process.env.API_KEY}`, (response) => {
+            let message = ""
+            response.on('data', chunk => {
+                message = message + chunk.toString()
+            })
+            response.on('end', () => {
+                event.reply('sendBooksApiResponse', message)
+            })
+            response.on('error', err => {
+                event.reply('sendBooksApiResponse', {"error": err})
+            })
         })
-        response.on('end', () => {
-            event.reply('sendBooksApiResponse', message)
-        })
-    })
+    }
 }
-
-ipcMain.on('addBooksToList', (event, arg) => {
-    event.reply('updateUserBookList', message).then(_ => console.log(`Added Books: ${arg}`))
-})
 
 ipcMain.on('runBooksApi', (event, arg) => {
     queryBooks(event, arg).then(_ => console.log(`search for '${arg}' complete`))
